@@ -1,0 +1,72 @@
+1.创建db2.t1，如下：（表记录bob行用时间函数来做，除s_year用指定时间，其余用系统时间）
+
+mysql> desc t1;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| name     | char(15) | YES  |     | NULL    |       |
+| brithday | date     | YES  |     | NULL    |       |
+| work     | time     | YES  |     | NULL    |       |
+| s_year   | year(4)  | YES  |     | NULL    |       |
+| meeting  | datetime | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
++------------+------------+----------+--------+---------------------+
+| name       | brithday   | work     | s_year | meeting             |
++------------+------------+----------+--------+---------------------+
+| wangdachui | 2018-10-20 | 08:30:00 |   1990 | 2017-09-30 18:00:00 |
++------------+------------+----------+--------+---------------------+
+2.接上，添加表字段email 类型为varchar(50) 默认值为 "student@tedu.cn"在name后面，以及在brithday后添加表字段age 类型为int(2)默认值为19
+3.接上，删除表字段s_year，meeting，brithday，work
+4.接上，添加表字段likes类型为set("game","film","sleep","eat")在name后
+5.接上，修改表字段name，age的类型为not null
+6.接上，修改表字段likes的名字为ab，并改类型为set('game','sleep','eat')
+7.修改表名为stuinfo
+8.创建表t2，如下，name、class为复合主键：
++-------+------------------+------+-----+---------+-------+
+| Field | Type             | Null | Key | Default | Extra |
++-------+------------------+------+-----+---------+-------+
+| name  | char(15)         | NO   | PRI | NULL    |       |
+| class | char(7)          | NO   | PRI | NULL    |       |
+| pay   | enum('yes','no') | YES  |     | NULL    |       |
++-------+------------------+------+-----+---------+-------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+参考：1.mysql> create database db2;
+      mysql> use db2;
+mysql> create table  t1(name char(15),brithday date,work time,s_year year,meeting datetime);
+
+mysql> insert into t1 values("wangdachui",20181020,083000,1990,20170930180000);
+
+mysql> insert into t1 values("bob",date(now()),time(now()),year(19951010),now());
+
+2.mysql> alter table db2.t1 add email varchar(50) default "student@tedu.cn" after name,add age int(2) default 19 after brithday;
+
+3.mysql> alter table t1 drop s_year,drop meeting，drop brithday,drop work;
+
+4.mysql> alter table t1 add likes set("game","film","sleep","eat") after name;
+
+5.mysql> alter table t1 modify name char(15)not null,modify age int(2)not null default 19;
+
+6.mysql> alter table t1 change likes ab set('game','sleep','eat');
+
+7.mysql> alter table t1 rename stuinfo;
+
+8.mysql> create table t2(name char(15),class char(7),pay enum("yes","no"),primary key(name,class));
+
+
+
+
